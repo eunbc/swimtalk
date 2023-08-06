@@ -11,49 +11,39 @@
     <nav class="navbar navbar-expand-sm" style="background-color: #e3f2fd;">
         <div class="container-fluid container-md">
             <a class="navbar-brand" href="#">수영톡톡</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="#">자유게시판</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">수영장 찾기</a>
+                        <a class="nav-link" href="#">수영장 정보</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 
+
     <div class="container-md" style="padding-top: 30px">
+        <a class="btn btn-primary" href="#" role="button">글쓰기</a>
         <table class="table table-hover">
             <thead>
             <tr>
-                <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
+                <th scope="col">글 번호</th>
+                <th scope="col">제목</th>
+                <th scope="col">작성자</th>
+                <th scope="col">작성일</th>
+                <th scope="col">조회</th>
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td colspan="2">Larry the Bird</td>
-                <td>@twitter</td>
+            <tr th:each="post : ${posts}">
+                <td th:text="${post.id}">134523</td>
+                <td th:text="${post.title}">노원구 수영장 추천</td>
+                <td th:text="${post.author}">노원물개</td>
+                <td th:text="${post.createTime}">2023.08.05</td>
+                <td th:text="${post.views}">83</td>
             </tr>
             </tbody>
         </table>
