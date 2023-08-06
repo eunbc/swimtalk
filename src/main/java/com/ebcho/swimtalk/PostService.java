@@ -9,6 +9,10 @@ public class PostService {
 	private PostRepository postRepository;
 
 	public Iterable<Post> getAllPosts() {
-		return postRepository.findAll();
+		return postRepository.findAllByOrderByIdDesc();
+	}
+	public void writePost(String title, String content) {
+		Post post = new Post(title, content);
+		postRepository.save(post);
 	}
 }

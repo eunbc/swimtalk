@@ -12,8 +12,12 @@ public class HomeController {
 	private PostService postService;
 	@GetMapping("/")
 	String home(Model model) {
-		//todo 리스트 담아서 리턴
 		model.addAttribute("posts", postService.getAllPosts());
 		return "index";
+	}
+
+	@GetMapping("/write")
+	String writePost() {
+		return "write";
 	}
 }

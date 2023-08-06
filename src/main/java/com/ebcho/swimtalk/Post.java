@@ -15,7 +15,16 @@ public class Post {
 	@GeneratedValue(strategy= GenerationType.AUTO)
 	private Long id;
 	private String title;
-	private String author;
+	private String author = "작성자";
+	private String content;
 	private LocalDateTime createTime;
-	private Long views;
+	private Long views = 0L;
+
+	protected Post() {}
+
+	Post(String title, String content) {
+		this.title = title;
+		this.content = content;
+		this.createTime = LocalDateTime.now();
+	}
 }
