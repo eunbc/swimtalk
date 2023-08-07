@@ -5,6 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.ebcho.swimtalk.service.PostService;
+
 @Controller
 public class HomeController {
 
@@ -16,8 +18,4 @@ public class HomeController {
 		return "index";
 	}
 
-	@GetMapping("/write")
-	String writePost() {
-		return "write";
-	}
 }

@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>수영톡톡</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-    <link href="navbar-fixed.css" rel="stylesheet">
 </head>
 <body>
     <nav class="navbar navbar-expand-sm" style="background-color: #e3f2fd;">
@@ -26,7 +25,7 @@
 
 
     <div class="container-md" style="padding-top: 30px">
-        <a class="btn btn-primary" href="/write" role="button">글쓰기</a>
+        <a class="btn btn-primary" href="/post/write" role="button">글쓰기</a>
         <table class="table table-hover">
             <thead>
             <tr>
@@ -40,7 +39,7 @@
             <tbody>
             <tr th:each="post : ${posts}">
                 <td th:text="${post.id}">134523</td>
-                <td th:text="${post.title}">노원구 수영장 추천</td>
+                <td><a href="post/detail.html" th:href="@{'/post/' + ${post.id}}" th:text="${post.title}">노원구 수영장 추천</a></td>
                 <td th:text="${post.author}">노원물개</td>
                 <td th:text="${post.createTime}">2023.08.05</td>
                 <td th:text="${post.views}">83</td>

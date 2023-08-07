@@ -1,4 +1,4 @@
-package com.ebcho.swimtalk;
+package com.ebcho.swimtalk.domain;
 
 import java.time.LocalDateTime;
 
@@ -22,9 +22,13 @@ public class Post {
 
 	protected Post() {}
 
-	Post(String title, String content) {
+	public Post(String title, String content) {
 		this.title = title;
 		this.content = content;
 		this.createTime = LocalDateTime.now();
+	}
+
+	public void viewCountUp() {
+		this.views++;
 	}
 }
