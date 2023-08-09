@@ -39,7 +39,7 @@
             <tbody>
             <tr th:each="post : ${posts}">
                 <td th:text="${post.id}">134523</td>
-                <td><a href="post/detail.html" th:href="@{'/post/' + ${post.id}}" th:text="${post.title}">노원구 수영장 추천</a></td>
+                <td><a href="post/detail.html" th:href="@{/post/{id}(id=${post.id})}" th:text="${post.title}">노원구 수영장 추천</a></td>
                 <td th:text="${post.author}">노원물개</td>
                 <td th:text="${post.createTime}">2023.08.05</td>
                 <td th:text="${post.views}">83</td>

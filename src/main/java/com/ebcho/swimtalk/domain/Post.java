@@ -19,6 +19,7 @@ public class Post {
 	private String content;
 	private LocalDateTime createTime;
 	private Long views = 0L;
+	private Boolean isDeleted = Boolean.FALSE;
 
 	protected Post() {}
 
@@ -30,5 +31,13 @@ public class Post {
 
 	public void viewCountUp() {
 		this.views++;
+	}
+	public void update(String title, String content) {
+		this.title = title;
+		this.content = content;
+	}
+
+	public void delete() {
+		this.isDeleted = Boolean.TRUE;
 	}
 }
