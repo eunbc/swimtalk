@@ -41,7 +41,10 @@
                 <td th:text="${post.id}">134523</td>
                 <td><a href="post/detail.html" th:href="@{/post/{id}(id=${post.id})}" th:text="${post.title}">노원구 수영장 추천</a></td>
                 <td th:text="${post.author}">노원물개</td>
-                <td th:text="${post.createTime}">2023.08.05</td>
+                <div th:with="isToday=${#temporals.format(post.createTime, 'yyyy-MM-dd') == #temporals.format(#temporals.createToday(), 'yyyy-MM-dd')}">
+                    <td th:if="${isToday}" th:text="${#temporals.format(post.createTime, 'HH:mm')}">17:25</td>
+                    <td th:if="${not isToday}" th:text="${#temporals.format(post.createTime, 'yyyy.MM.dd')}">2023.08.05</td>
+                </div>
                 <td th:text="${post.views}">83</td>
             </tr>
             </tbody>
