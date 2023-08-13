@@ -8,21 +8,7 @@
     <script src="https://cdn.ckeditor.com/ckeditor5/39.0.0/classic/ckeditor.js"></script>
 </head>
 <body>
-    <nav class="navbar navbar-expand-sm" style="background-color: #e3f2fd;">
-        <div class="container-fluid container-md">
-            <a class="navbar-brand" href="#">수영톡톡</a>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">자유게시판</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">수영장 정보</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    <div th:replace="~{common/nav}"></div>
 
     <div class="container-md" style="padding-top: 30px">
         <form action="#" th:action="@{/post/update/{id}(id=${post.id})}" method="post">

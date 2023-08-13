@@ -8,32 +8,15 @@
     <script src="https://cdn.ckeditor.com/ckeditor5/39.0.0/classic/ckeditor.js"></script>
 </head>
 <body>
-    <nav class="navbar navbar-expand-sm" style="background-color: #e3f2fd;">
-        <div class="container-fluid container-md">
-            <a class="navbar-brand" href="#">수영톡톡</a>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">자유게시판</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">수영장 정보</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    <div th:replace="~{common/nav}"></div>
 
     <div class="container-md" style="padding-top: 30px">
         <div class="post">
             <div class="post-title" th:text="${post.title}">게시글 제목</div>
             <div th:text="${post.author}">작성자명</div>
             <div class="post-meta">
-                <div th:with="isToday=${#temporals.format(post.createTime, 'yyyy-MM-dd') == #temporals.format(#temporals.createToday(), 'yyyy-MM-dd')}">
-                    <span th:if="${isToday}" th:text="${#temporals.format(post.createTime, 'HH:mm')}">17:25</span>
-                    <span th:if="${not isToday}" th:text="${#temporals.format(post.createTime, 'yyyy.MM.dd')}">2023.08.05</span>
-                </div>
-                조회 <span th:text="${post.views}">98</span>
+                <span th:text="${#temporals.format(post.createTime, 'yyyy.MM.dd HH:mm')}">2023.08.05 11:25</span> | 조회
+                <span th:text="${post.views}">98</span>
             </div>
 
             <hr>
