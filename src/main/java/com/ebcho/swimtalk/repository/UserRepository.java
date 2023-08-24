@@ -10,5 +10,5 @@ import com.ebcho.swimtalk.domain.Post;
 import com.ebcho.swimtalk.domain.User;
 
 public interface UserRepository extends CrudRepository<User, Long> {
-	Optional<User> findbyEmail(String email);
+	// Optional<User> findbyEmail(String email);
 }

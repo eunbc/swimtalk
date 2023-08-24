@@ -11,7 +11,8 @@ import com.ebcho.swimtalk.repository.UserRepository;
 public class UserService {
 	private UserRepository userRepository;
 	public void login(String username, String email, String snsId) {
-		User user = userRepository.findbyEmail(email).orElse(new User(username, email, snsId));
-		userRepository.save(user);
+		//todo 로그인
+		// User user = userRepository.findbyEmail(email).orElse(new User(username, email, snsId));
+		// userRepository.save(user);
 	}
 }
