@@ -17,4 +17,5 @@ public class RegionService {
 	public List<Region> getRegions(long upperId) {
 		return regionRepository.findByUpperId(upperId);
 	}
+
 }
