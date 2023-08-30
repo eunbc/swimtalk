@@ -17,8 +17,8 @@ public class Pool {
 	private String telephone;
 	private String link;
 
-	private Integer mapX;
-	private Integer mapY;
+	private String mapX;
+	private String mapY;
 
 	private Long regionId;
 }
