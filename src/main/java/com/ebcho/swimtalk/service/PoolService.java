@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.ebcho.swimtalk.domain.Pool;
 import com.ebcho.swimtalk.domain.Region;
+import com.ebcho.swimtalk.dto.PoolDetailDto;
 import com.ebcho.swimtalk.dto.PoolListDto;
 import com.ebcho.swimtalk.repository.PoolRepository;
 import com.ebcho.swimtalk.repository.RegionRepository;
@@ -24,5 +25,10 @@ public class PoolService {
 		Region province = regionRepository.findById(city.getUpperId()).orElseThrow();
 		List<Pool> poolList = poolRepository.findByRegionId(regionId);
 		return new PoolListDto(province,city,poolList);
+	}
+
+	public PoolDetailDto getPool(String poolId) {
+		Pool pool = poolRepository.findById(poolId).orElseThrow();
+		return new PoolDetailDto(pool);
 	}
 }
