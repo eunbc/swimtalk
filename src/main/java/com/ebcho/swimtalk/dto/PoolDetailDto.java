@@ -17,9 +17,6 @@ public class PoolDetailDto {
 	private String telephone;
 	private String link;
 
-	private String mapX;
-	private String mapY;
-
 	private Long regionId;
 
 	public PoolDetailDto(Pool pool) {
@@ -28,8 +25,6 @@ public class PoolDetailDto {
 		this.address = pool.getAddress();
 		this.telephone = pool.getTelephone();
 		this.link = pool.getLink();
-		this.mapX = pool.getMapX();
-		this.mapY = pool.getMapY();
 		this.regionId = pool.getRegionId();
 	}
 }
