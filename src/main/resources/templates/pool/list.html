@@ -12,7 +12,7 @@
     <div class="container-md" style="padding-top: 30px">
         <h2 ><span th:text="${pools.region.name}">서울시 강남구</span> 검색 결과 : <span th:text="${pools.poolList.size()}"></span>건</h2>
         <div id="map" style="width:1000px;height:400px;"></div>
-        <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9658a0981cdac6e3f884b7e50e8708a4"></script>
+        <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9658a0981cdac6e3f884b7e50e8708a4&libraries=services"></script>
         <script th:inline="javascript">
             var mapContainer = document.getElementById('map'), // 지도를 표시할 div
                 mapOption = {
@@ -22,39 +22,49 @@
 
             var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 
-            // 마커를 표시할 위치와 title 객체 배열입니다
-            var positions = [[${#lists.toList(pools.poolList)}]].map(function(pool) {
-                return {
-                    id: pool.id,
-                    title: '<div style="padding:5px;">' + pool.name + '</div>',
-                    latlng: new kakao.maps.LatLng(pool.mapX, pool.mapY)
-                };
+            // 주소-좌표 변환 객체를 생성합니다
+            var geocoder = new kakao.maps.services.Geocoder();
+            // 서버에서 전달받은 pools.poolList 데이터
+            var poolList = [[${#lists.toList(pools.poolList)}]];
+            var positions = [];
+
+            // Promise를 사용하여 모든 주소 검색이 완료될 때까지 기다립니다.
+            var promises = poolList.map(function(pool) {
+                return new Promise(function(resolve, reject) {
+                    geocoder.addressSearch(pool.address, function(result, status) {
+                        if (status === kakao.maps.services.Status.OK) {
+                            var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+                            positions.push({
+                                id: pool.id,
+                                title: '<div style="padding:5px;">' + pool.name + '</div>',
+                                latlng: coords
+                            });
+                            resolve();
+                        } else {
+                            reject(status);
+                        }
+                    });
+                });
             });
 
-            // 지도를 재설정할 범위정보를 가지고 있을 LatLngBounds 객체를 생성합니다
-            var bounds = new kakao.maps.LatLngBounds();
+            // 모든 주소 검색이 완료되면 지도를 그립니다.
+            Promise.all(promises).then(function() {
+                var bounds = new kakao.maps.LatLngBounds();
 
-            for (var i = 0; i < positions.length; i ++) {
+                for (var i = 0; i < positions.length; i++) {
+                    var infowindow = new kakao.maps.InfoWindow({
+                        map: map,
+                        position: positions[i].latlng,
+                        content: positions[i].title
+                    });
 
-                // // 마커를 생성합니다
-                // var marker = new kakao.maps.Marker({
-                //     map: map, // 마커를 표시할 지도
-                //     position: positions[i].latlng, // 마커를 표시할 위치
-                //     title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
-                //     image : markerImage // 마커 이미지
-                // });
+                    bounds.extend(positions[i].latlng);
+                }
 
-                // 인포윈도우를 생성하고 지도에 표시합니다
-                var infowindow = new kakao.maps.InfoWindow({
-                    map: map, // 인포윈도우가 표시될 지도
-                    position : positions[i].latlng,
-                    content : positions[i].title
-                });
-
-                bounds.extend(positions[i].latlng);
-            }
-
-            map.setBounds(bounds);
+                map.setBounds(bounds);
+            }).catch(function(error) {
+                console.error("An error occurred: ", error);
+            });
 
             // 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
             var zoomControl = new kakao.maps.ZoomControl();
