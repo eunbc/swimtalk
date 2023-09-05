@@ -1,0 +1,25 @@
+body {
+    margin: 0;
+}
+
+nav {
+    background-color: #e3f2fd;
+    padding: 7px 7px;
+}
+
+#title a{
+    text-decoration: none;
+    color: gray;
+    letter-spacing: -.05em;
+    --tw-text-opacity: 1;
+    font-weight: 900;
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+}
+
+.container {
+    margin: auto;
+    width: 70%;
+    min-width: 480px;
+    padding: 10px;
+}
